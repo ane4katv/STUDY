@@ -1,0 +1,213 @@
+The Bitwise Algorithms are used to perform operations at bit-level or to manipulate bits in different ways.
+The bitwise operations are found to be much faster and are some times used to improve the efficiency of a program.
+
+For example: To check if a number is even or odd.
+This can be easily done by using Bitwise-AND(&) operator.
+If the last bit of the operator is set than it is ODD otherwise it is EVEN.
+Therefore, if num & 1 not equals to zero than num is ODD otherwise it is EVEN.
+
+
+    4   2   1
+1   0   0   1
+2   0   1   0
+3   0   1   1
+4   1   0   0
+5   1   0   1
+6   1   1   0
+7   1   1   1
+
+=============================================
+BIT-WISE OPERATIONS:
+
+1.
+NOT / INVERT (~)
+turns 0 -> 1, 1 -> 0
+~ x = - (x+1)
+
+2.
+BITWISE AND (&)
+a & b
+returns "1" only if a=1 AND b=1
+
+Use: for masking (when you only interested in few bits: having all ones will find all ones)
+
+3.
+BITWISE OR (| "pipe")
+a | b
+returns "1" if a=1 OR b=1
+
+Use: set bits (having all zeros in mask will find all ones)
+
+4.
+BITWISE XOR / eXlusive OR (^ caret)
+a ^ b
+returns "1" if a != b
+
+Use: encoding and encryption algorithms, finding differences
+
+5.
+LEFT SHIFT
+When shifting left, the most-significant bit is lost,
+and a 00 bit is inserted on the other end.
+0010 << 1  →  0100
+0010 << 2  →  1000
+
+A single left shift multiplies a binary number by 2:
+0010 << 1  →  0100
+
+0010 is 2
+0100 is 4
+
+a << b
+
+a - what shifted
+b - by how many elements
+
+returns a*2**b
+removes b chars from the end, add b zeros to the beginning of the bit
+
+0b0100 << 1 -> 0b1000
+
+USE: quick way to do multiplication. 1 << 7 will move last elem to 7th pos from end
+
+6.
+RIGHT SHIFT
+When shifting right with a logical right shift,
+the least-significant bit is lost and a 00 is inserted on the other end.
+1011 >>> 1  →  0101
+1011 >>> 3  →  0001
+
+For positive numbers, a single logical right shift divides a number by 2,
+throwing out any remainders.
+0101 >>> 1  →  0010
+
+0101 is 5
+0010 is 2
+
+a >> b
+returns a // 2**b
+removes b chars from the end, add b zeros to the beginning of the bit
+
+0b0100 >> 1 -> 0b0010
+
+Use: to process right most bit,till you go through all bits
+
+
+~ Binary Ones Complement
+---------------------------------------------
+The complement operator (~) JUST FLIPS BITS.
+It is up to the machine to interpret these bits.
+
+Flip is called 1's complement
+
+Negative numbers are stored as the two's complement
+of the positive counterpart.
+ex:
+representation of -2 in two's complement: (8 bits)
+1111 1110
+----------------------------------------------
+Here's how a negative binary is converted to decimal:
+
+1. Invert the bits      1100 0011   -> 0011 1100
+
+2. Add 1                + 1         -> 0011 1101
+
+3. Convert to decimal    61
+
+4. Add negative sign    -61
+
+
+In python negative number will be shown just as -0 bxxxx-xxxx
+To see it in flipped format:
+Ex: num = -27
+
+ # 8 bit length:
+ bin((1<<8) - 27)[2:]
+ 11100101'
+
+# 32 bit length:
+bin((1<<32) - 27)
+'0b11111111111111111111111111100101'
+
+# 16 bitlength:
+bin((1<<16) - 27)
+
+
+===================================================
+
+x - 1
+=====
+will change first "1" from the right to "0"
+will change all bits from the right of it to "1"
+will leave unchanged all bits on left
+
+0011 0000
+0000 0001 -
+---------
+0010 1111
+
+x & (x-1)
+=========
+will clear the lowest set bit of x (change first "1" from right to "0")
+if total number will be equal to "0" after it,
+it means only one "1" was in the binary number
+* it is true for all power of 2 numbers (besides "0")
+
+0011 0000
+0000 0001 -
+---------
+0010 1111
+
+0011 0000
+0010 1111 &
+---------
+0010 0000  (not == 0, so original num had >1 set bits (bits = '1'))
+
+x & ~(x-1)
+==========
+extracts the lowest set bit of x (all others are clear).
+Returns first bit that == '1' and all '0' on its right side. Ignores left part.
+100010000 -> 10000
+
+x + 1
+=====
+will change first "0" to "1"
+will change all bits on right to "0"
+will leave unchanged all bits on left
+
+0000 0111
+0000 0001 +
+---------
+0000 1000
+
+
+x | (x + 1)
+============
+change the most right "0" to "1"
+
+0000 0111
+0000 0001 +
+---------
+0000 1000
+
+0000 0111
+0000 1000 |
+---------
+0000 1111
+
+
+x | (x - (1 << n)) = x
+with the run of cleared bits (possibly length 0) starting at bit n set.
+
+x | ~(x - (1 << n)) =
+the lowest run of cleared bits (possibly length 0) in x, starting at bit n are the only clear bits.
+
+
+===============================================
+
+
+https://www.youtube.com/watch?v=xNaLrnTuw-M record algorithm
+https://www.youtube.com/playlist?list=PL5tcWHG-UPH1u5iox6v1Hey59vNd5cnTw
+
+ALGORITHMS
+https://www.geeksforgeeks.org/bitwise-algorithms/

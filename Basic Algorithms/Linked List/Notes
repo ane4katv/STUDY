@@ -1,0 +1,33 @@
+LINKED LIST
+
+Traversing (link hopping, pointer hopping) -
+process of going through nodes of linked list
+
+Time complexity vs.regular list:
+- Insertion and deletion of elements at the beginning or the end of the list
+Linked List: O(1), LIst: O(n)
+
+- Lookup of elements
+Linked List: O(n), LIst: O(1)
+
+- Searching for a specific element,
+Both Θ(n)
+
+Can continue to expand
+without having specify their size
+
+
+Can be used to implement:
+- queues
+- stacks
+- graphs
+They’re also useful for much more complex tasks such as lifecycle management for an operating system application
+
+
+
+DOUBLY LINKED LIST
+
+A sentinel node is a dummy node that goes at the front of a list.
+In a doubly-linked list, the sentinel node points to the first and last elements of the list.
+We no longer need to keep separate pointers for the head and tail of the list,
+like we had to do with singly-linked lists.

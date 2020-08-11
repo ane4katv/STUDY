@@ -1,0 +1,43 @@
+Unsigned Numbers
+----------------
+ can be only positive
+ Representation  of Unsigned Binanry Numbers:
+ Every number in unsigned number representation
+ has only one unique binary equivalent form,
+ so this is unambiguous representation technique.
+ The range of unsigned binary number is from  0 to (2n-1).
+
+Signed Numbers:
+----------------
+- can be negative or positive
+- count only half as far, but in both directions (- and +)
+
+Signed numbers contain sign flag,
+this representation distinguish positive and negative numbers.
+For example, in representation of negative decimal numbers,
+we need to put negative symbol in front of given decimal number.
+
+Signed Representation Forms:
+1. Sign-Magnitude
+    For n bit binary number, 1 bit is reserved for sign symbol
+    If the value of sign bit is 0, then the given number will be positive,
+    else if the value of sign bit is 1, then the given number will be negative.
+2. 1's Compliment
+    Obtained by inverting each bit of given number.
+    we represent positive numbers in binary form
+    and negative numbers in 1’s complement form
+    There is extra bit for sign representation
+3. 2's Compliment
+    obtained by inverting each bit of given number plus 1
+    to least significant bit (LSB)
+    we represent positive numbers in binary form
+    and negative numbers in 2’s complement form
+    There is extra bit for sign representation
+==============================================
+Number can look the same:
+1010
+signed: -2
+unsigned: 10
+
+Python doesn't have builtin unsigned types
+

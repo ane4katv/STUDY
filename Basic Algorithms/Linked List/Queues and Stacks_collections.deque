@@ -1,0 +1,47 @@
+collections.deque
+
+Specific object in the collections module'
+can be used for linked lists called deque(pronounced “deck”)
+which stands for double-ended queue
+
+collections.deque uses an implementation of a linked list
+in which you can access, insert, or remove elements from the beginning or end
+of a list with constant O(1) performance
+
+create an empty linked list:
+>>> from collections import deque
+>>> deque()
+deque([])
+
+to populate it at creation, you can give it an iterable as input:
+>>> deque([{'data': 'a'}, {'data': 'b'}])
+deque([{'data': 'a'}, {'data': 'b'}])
+
+append() and pop() add or remove elements
+from the right side of the linked list.
+However, you can also use deque to quickly
+add or remove elements from the left side, of the list:
+appendleft()
+popleft()
+
+QUEUES
+from collections import deque
+>>> names = deque()
+
+>>> names.append("Anna") # regular append()
+>>> names.append("Masha")
+
+>>> names.popleft() # popLEFT()!
+
+
+Enqueue - add values to a list
+Dequeue - remove the element that has been on the list the longest (like queue at a store).
+
+STACKS
+from collections import deque
+>>> names = deque()
+
+>>> history.appendleft("Anna")  # appendLEFT()!
+>>> history.appendleft("Masha")
+
+>>> names.popleft() # popLEFT()!
