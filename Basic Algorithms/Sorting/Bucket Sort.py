@@ -17,7 +17,7 @@ def bucket_sort(array):
     for i in range(len(buckets)):
         if len(buckets[i]) > 1:
             insertion_sort(buckets[i])
-            print(buckets[i])
+        print(buckets[i])
         if len(buckets[i]) > 0:
             output.extend(buckets[i])
 

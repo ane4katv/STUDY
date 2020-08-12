@@ -1,7 +1,7 @@
 # ===== O(log n) ===== #
 
 # Examples:
-# - Binary Search:
+# - Binary Search Tree:
 # In every iteration the search group will become half of the original value.
 #
 # - Finding largest/smallest number in a binary search tree:
