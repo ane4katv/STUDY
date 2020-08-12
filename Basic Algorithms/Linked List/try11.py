@@ -1,15 +1,35 @@
-def insertion_sort(array):
-    for i in range(1, len(array)):
-        while array[i] < array[i-1] and i > 0:
-            swap(i, i-1)
-            i -= 1
+def binary_search(array, num):
+    start = 0
+    end = len(array) - 1
+    mid_point = len(array) // 2
 
 
-def swap(i, j):
-    array[i], array[j] = array[j], array[i]
+    # Base case
+    if start == end:
+        if array[0] == num:
+            return True
+        else:
+            return False
+
+    while start < end:
+        if num == array[mid_point]:
+            return True
+
+        if num > array[mid_point]:
+            start = mid_point + 1
+            print(array[start:end+1])
+            print(f'start: {start}, {array[start]}, end: {end}, {array[end]}, mid_point: {mid_point}, {array[mid_point]}')
+            binary_search(array[start:end+1], num)
+
+        if num < array[mid_point]:
+            end = mid_point - 1
+            binary_search(array[start:end], num)
+
+    return False
 
 
 
-array = [9,8]
-insertion_sort(array)
-print(array)
+
+a = [2, 4, 6, 8, 9, 12, 18]
+
+print(binary_search(a, 18))
