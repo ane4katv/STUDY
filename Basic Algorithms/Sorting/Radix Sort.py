@@ -26,4 +26,4 @@ def counting_sort(array, place):
         array[i] = output[i]
 
 
-radix_sort([5, 14, 569, 340, 12])
+radix_sort([410,1,1,0,6])
