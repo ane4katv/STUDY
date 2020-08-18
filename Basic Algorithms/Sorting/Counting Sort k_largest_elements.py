@@ -8,14 +8,12 @@ def k_largest(nums, k):
 
     count = [0 for i in range(0, max_elem+1 + shift)]
 
-    result = []
-
     for i in range(0, len(nums)):
         count[nums[i]+shift] += 1
 
     print(count)
 
-    while k > 0:
+    ''' while k > 0:
         max_index = 0
         max_num = count[0]
         for i in range(1, len(count)):
@@ -25,10 +23,22 @@ def k_largest(nums, k):
 
         result.append(max_index - shift)
         count[max_index] = 0
-        k -= 1
+        k -= 1'''
+    output = [0] * len(count)
+    o = [0] * len(count)
+    c = [0 for i in range(min(count),len(count)+1)]
+    for i in count:
+        c[i] += 1
 
-    return result
+    for i in range(1, len(c)):
+        c[i] += c[i-1]
+
+    for i in range(len(count)):
+        output[c[count[i]]-1] = count[i]
+        o[c[count[i]]-1] = i - shift
+        c[count[i]] -= 1
+    return o[-k:]
 
 
-a = [-5,-8, -8]
+a = [-5,-8, -8, -8, -5, -1,-3]
 print(k_largest(a, 2))
