@@ -13,8 +13,8 @@ def selection_sort(array):
                 min_elem = array[i]
                 min_index = count
 
-            if min_elem != array[n]:
-                array[min_index], array[n] = array[n], array[min_index]
+        if min_elem != array[n]:
+            array[min_index], array[n] = array[n], array[min_index]
 
         n += 1
 

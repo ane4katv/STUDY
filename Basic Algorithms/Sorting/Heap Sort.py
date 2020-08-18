@@ -1,10 +1,11 @@
 def heap_sort():
-    last_parent = len(array) // 2 -1
+    last_parent = len(array) // 2 - 1
 
     for i in range(last_parent, -1, -1):
         heapify(len(array), i)
 
-    for i in range(len(array)-1, 0, -1):
+    for i in range(len(array) - 1, 0, -1):
+        print(i, array)
         swap(i, 0)
         heapify(i, 0)
 
@@ -12,7 +13,7 @@ def heap_sort():
 def heapify(length, i):
     largest = i
     left = 2 * i + 1
-    right = 2 * i +2
+    right = 2 * i + 2
 
     if left < length and array[left] > array[largest]:
         largest = left
@@ -25,10 +26,10 @@ def heapify(length, i):
         heapify(length, largest)
 
 
-def swap(i,j):
+def swap(i, j):
     array[i], array[j] = array[j], array[i]
 
 
-array = [5,8,12,0,-3,6,4]
+array = [0,8,4,3,6,2]
 heap_sort()
 print(array)
