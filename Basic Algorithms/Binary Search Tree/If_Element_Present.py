@@ -26,6 +26,6 @@ def binary_search(array, num):
 
 
 
-a = [4, 6, 8, 9, 12, 18]
+a = [4, 6, -8, 9, 12, 18]
 
-print(binary_search(a, 5))
+print(binary_search(a, 18))
