@@ -2,30 +2,42 @@
 
 
 def binary_search(array, num):
+
     start = 0
     end = len(array) - 1
-    mid_point = len(array) // 2
+    # mid_point = (start+end) // 2
+    mid_point = start + (end - start) // 2
 
-    # Base case
-    if start == end:
-        if array[0] == num:
+    if start <= end:
+
+        if num == array[mid_point]:
             return True
-        else:
-            return False
 
-    if num > array[mid_point]:
-        start = mid_point + 1
-        print(f'start: {array[start]}, end: {array[end]}, mid_point: {array[mid_point]}')
-        binary_search(array[start:end+1], num)
+        if num > array[mid_point]:
+            start = mid_point + 1
+            return binary_search(array[start:end+1], num)
 
-    if num < array[mid_point]:
-        end = mid_point - 1
-        binary_search(array[start:end], num)
+        if num < array[mid_point]:
+            end = mid_point - 1
+            return binary_search(array[start:end+1], num)
 
-    return array
+    else:
+        return False
 
 
 
-a = [4, 6, -8, 9, 12, 18]
 
+
+
+a = [4, 6, 8, 9, 12, 18]
+
+
+print(binary_search(a, 19))
+print(binary_search(a, 20))
+print(binary_search(a, 21))
+print(binary_search(a, 4))
+print(binary_search(a, 6))
+print(binary_search(a, 8))
+print(binary_search(a, 9))
+print(binary_search(a, 12))
 print(binary_search(a, 18))
