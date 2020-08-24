@@ -1,26 +1,8 @@
-def binary_search_iter(array, num):
-    left = 0
-    right = len(array) - 1
+input_list = [1,2,3,5]
+input_list.insert(3, 4)
 
-    while left <= right:
-        mid_point = (left + right) // 2
-        print(array[mid_point])
+print(input_list)
 
-        if array[mid_point] == num:
-            return True
+input_list.pop(0)
 
-        if array[mid_point] > num:
-            right = mid_point - 1
-
-        if array[mid_point] < num:
-            left = mid_point + 1
-
-    return False
-
-
-a = [4, 6, 8, 9, 12, 18]
-
-print(binary_search_iter(a, 20))
-
-
-
+print(input_list)
