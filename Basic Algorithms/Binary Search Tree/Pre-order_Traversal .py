@@ -30,7 +30,7 @@ class BinaryTree:
     def pre_order_print(self, start, traversal):
         if start:
 
-            traversal += (str(start.value) + ' -> ')
+            traversal += str(start.value) + ' -> '
             traversal = self.pre_order_print(start.left, traversal)
             traversal = self.pre_order_print(start.right, traversal)
 
