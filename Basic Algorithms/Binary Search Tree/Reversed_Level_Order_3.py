@@ -10,7 +10,6 @@ output: [6,7, 4,5, 2,3, 1]
 """
 
 
-
 class Node:
     def __init__(self, value):
         self.value = value
@@ -23,27 +22,31 @@ class BinaryTree:
         self.root = Node(value)
 
     def reversed_level_trav(self):
-        if not self.root:
-            return
+        queue = [self.root]
+        stack = []
+        traversal = ""
 
-        node = self.root
-        queue = [node.value]
-
-        while node:
+        while len(queue) > 0:
+            node = queue.pop(0)
+            if node.left or node.right:
+                stack.insert(0, node)
 
             if node.right:
-                queue.insert(0, node.right.value)
+                queue.insert(0, node.right)
 
             if node.left:
-                queue.insert(0, node.left.value)
+                queue.insert(0, node.left)
 
-            node = node.left
+        while len(stack) > 0:
+            stack_node = stack.pop(0)
+            if stack_node.left:
+                traversal += str(stack_node.left.value) + ' - '
+            if stack_node.right:
+                traversal += str(stack_node.right.value) + ' - '
+            if stack_node is self.root:
+                traversal += str(stack_node.value)
 
-
-        print(queue)
-
-
-
+        return traversal
 
 
 tree = BinaryTree(1)
