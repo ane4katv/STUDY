@@ -1,3 +1,16 @@
+"""
+        1
+    /       \
+  2           3
+/   \       /   \
+4   5       6   7
+
+output: [4,5,6,7,2,3,1]
+
+"""
+
+
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -15,27 +28,19 @@ class BinaryTree:
 
         queue = [self.root]
         stack = []
-        traversal = ""
 
         while len(queue) > 0:
             node = queue.pop()
 
-            stack.append(node)
+            stack.insert(0,node)
 
             if node.right:
-                queue.append(node.right)
+                queue.insert(0, node.right)
 
             if node.left:
-                queue.append(node.left)
+                queue.insert(0, node.left)
 
-        while len(stack) > 0:
-            node = stack.pop()
-            traversal += str(node.value) + "-"
-
-
-
-
-        return traversal
+        return [i.value for i in stack]
 
 
 tree = BinaryTree(1)
