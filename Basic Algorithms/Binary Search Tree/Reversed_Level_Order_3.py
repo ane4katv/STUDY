@@ -26,23 +26,24 @@ class BinaryTree:
         if not self.root:
             return
 
-        queue = [self.root]
-        stack = []
+        node = self.root
+        queue = [node.value]
 
-        while len(queue) > 0:
-            node = queue.pop()
-
-            stack.insert(0,node)
-
-            if node.left:
-                queue.insert(0, node.left)
+        while node:
 
             if node.right:
-                queue.insert(0, node.right)
+                queue.insert(0, node.right.value)
+
+            if node.left:
+                queue.insert(0, node.left.value)
+
+            node = node.left
+
+
+        print(queue)
 
 
 
-        return [i.value for i in stack]
 
 
 tree = BinaryTree(1)
