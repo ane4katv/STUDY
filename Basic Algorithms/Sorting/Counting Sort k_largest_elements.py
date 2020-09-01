@@ -3,42 +3,35 @@ def k_largest(nums, k):
     min_num = min(nums)
     shift = 0
 
+
     if min_num < 0:
-        shift = - min_num  # it makes it positive ;)
+        shift = - min_num
 
     count = [0 for i in range(0, max_elem+1 + shift)]
+
+    if len(count) == 1:
+        return [nums[0]]
 
     for i in range(0, len(nums)):
         count[nums[i]+shift] += 1
 
     print(count)
 
-    ''' while k > 0:
-        max_index = 0
-        max_num = count[0]
-        for i in range(1, len(count)):
-            if count[i] > max_num:
-                max_num = count[i]
-                max_index = i
-
-        result.append(max_index - shift)
-        count[max_index] = 0
-        k -= 1'''
-    output = [0] * len(count)
     o = [0] * len(count)
-    c = [0 for i in range(min(count),len(count)+1)]
+    c = [0 for i in range(min(count), len(count)+1)]
+
     for i in count:
+        pass
         c[i] += 1
 
     for i in range(1, len(c)):
-        c[i] += c[i-1]
+        c[i] += c[i - 1]
 
     for i in range(len(count)):
-        output[c[count[i]]-1] = count[i]
-        o[c[count[i]]-1] = i - shift
         c[count[i]] -= 1
+        o[c[count[i]]] = i - shift
+
     return o[-k:]
 
-
-a = [-5,-8, -8, -8, -5, -1,-3]
+a = [1,1,1,2,2,33333333]
 print(k_largest(a, 2))
