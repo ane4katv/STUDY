@@ -12,7 +12,7 @@ def bfs(graph, root):
                 stack.append(value)
 
     for key in graph:   # for disconnected graph
-        if graph.get(key) == {}:
+        if graph.get(key) == {} and key not in visited:
             visited.append(key)
 
 
