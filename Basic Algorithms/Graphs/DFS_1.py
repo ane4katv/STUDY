@@ -11,8 +11,13 @@ def bfs(graph, root):
             for value in graph[popped]:
                 stack.append(value)
 
+    for key in graph:   # for disconnected graph
+        if graph.get(key) == {}:
+            visited.append(key)
+
+
     print(visited)
 
 
-graph1 = {2: {0}, 0: {1, 2}, 1: {2, 3}, 3: {3}}
-bfs(graph1, list(graph1)[0])
+graph1 = {0: {1, 2}, 1: {2}, 2: {3, 0}, 3: {3}, 5:{}}
+bfs(graph1, 1)
