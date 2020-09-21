@@ -1,4 +1,3 @@
-from collections import deque
 
 
 def bfs(graph, root):
@@ -15,5 +14,5 @@ def bfs(graph, root):
     print(visited)
 
 
-graph1 = {0: {1, 2, 3}, 1: {0, 2}, 2: {1, 4}, 3: {}, 4: {}}
+graph1 = {2: {0}, 0: {1, 2}, 1: {2, 3}, 3: {3}}
 bfs(graph1, list(graph1)[0])
