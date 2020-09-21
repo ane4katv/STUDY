@@ -14,11 +14,11 @@ class BinaryTree:
             return
 
         queue = [self.root]
-        traversal = ""
+        traversal = []
 
         while len(queue) > 0:
-            traversal += str(queue[0].value) + " - "
             node = queue.pop(0)
+            traversal.append(node.value)
 
             if node.left:
                 queue.append(node.left)
@@ -26,7 +26,8 @@ class BinaryTree:
             if node.right:
                 queue.append(node.right)
 
-        return traversal[0:-2]
+        return traversal
+
 
 tree = BinaryTree(1)
 tree.root.left = Node(2)

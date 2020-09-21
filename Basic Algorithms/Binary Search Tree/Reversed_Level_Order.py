@@ -26,17 +26,20 @@ class BinaryTree:
         stack = []
 
         while len(queue) > 0:
-            node = queue.pop()
+            queue = [self.root]
+            traversal = []
 
-            stack.insert(0,node)
+            while len(queue) > 0:
+                node = queue.pop(0)
+                traversal.insert(0, node.value)
 
-            if node.right:
-                queue.insert(0, node.right)
+                if node.right:
+                    queue.append(node.right)
 
-            if node.left:
-                queue.insert(0, node.left)
+                if node.left:
+                    queue.append(node.left)
 
-        return [i.value for i in stack]
+            return traversal
 
 
 tree = BinaryTree(1)
