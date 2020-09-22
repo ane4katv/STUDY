@@ -1,12 +1,10 @@
-# initializing dictionary
-test_dict = {'Gfg': 1, 'is': 2, 'best': 3}
+addict = {'A': ['B', 'C'],
+          'B': ['E','A'],
+          'C': ['E','A', 'B','F']}
 
-# printing original dictionary
-print("The original dictionary is : " + str(test_dict))
+sorted_keys = addict.keys()
+size = len(sorted_keys)
 
-# Using keys() + list()
-# Getting first key in dictionary
-res = list(test_dict)[0]
-
-# printing initial key
-print("The first key of dictionary is : " + str(res))
+for i in range(len(sorted_keys)):
+    for j in addict[i]:
+        print(i,j)
