@@ -1,4 +1,4 @@
-# NotWeighted, Directed Graph
+# NotWeighted, NotDirected Graph
 
 
 class Vertex:
