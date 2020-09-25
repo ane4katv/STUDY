@@ -1,5 +1,9 @@
 # NotWeighted, NotDirected Graph
 
+# Для направленного графа все будет то же самое как для ненаправленного кроме
+# connect only start to end (line 33), а не в обе стороны?
+
+
 
 class Vertex:
     def __init__(self, value):

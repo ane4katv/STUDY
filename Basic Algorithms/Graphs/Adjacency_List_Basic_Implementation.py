@@ -8,7 +8,7 @@ class Vertex:
 
     def __str__(self):
         return str(self.id) + \
-               ' connectedTo: ' + str([x.id for x in self.connected_to])
+        ' connectedTo: ' + str([x.id for x in self.connected_to])
 
     def get_connections(self):
         return self.connected_to.keys()
