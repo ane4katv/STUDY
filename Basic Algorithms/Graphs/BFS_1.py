@@ -6,6 +6,7 @@ def bfs(graph, root):
     queue.append(root)
     visited = []
 
+
     while queue:
         popped = queue.popleft()
         if popped not in visited:
@@ -20,5 +21,5 @@ def bfs(graph, root):
     print(visited)
 
 
-graph1 = {0: {1, 2, 3}, 1: {0, 2}, 2: {1, 4}, 3: {}, 4: {}, 5: {}}
-bfs(graph1, list(graph1)[0])
+graph1 = {0: {1, 2, 3}, 1: {0, 2}, 2: {1, 4}, 3: {}, 4: {},5:{}}
+bfs(graph1, 2)

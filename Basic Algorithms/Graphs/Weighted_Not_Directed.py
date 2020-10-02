@@ -1,9 +1,5 @@
 # Weighted, NotDirected Graph
 
-# Для направленного графа все будет то же самое как для ненаправленного кроме
-# connect only start to end (line 33), а не в обе стороны?
-
-
 class Vertex:
     def __init__(self, value):
         self.value = value
@@ -30,8 +26,8 @@ class Weighted:
         if end not in self.weighted:
             self.add_vertex(end)
 
-        self.weighted[start].add_neighbor(self.weighted[end], cost)
-        self.weighted[end].add_neighbor(self.weighted[start], cost)
+        self.weighted[start].add_neighbor(self.weighted[end].value, cost)
+        self.weighted[end].add_neighbor(self.weighted[start].value, cost)
 
 
     def __str__(self):
