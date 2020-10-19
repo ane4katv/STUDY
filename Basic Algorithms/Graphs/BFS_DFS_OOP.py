@@ -4,10 +4,10 @@ from collections import deque
 class Vertex:
     def __init__(self, value):
         self.value = value
-        self.neighbors = {}
+        self.neighbors = []
 
-    def add_neighbor(self, nbr, cost):
-        self.neighbors[nbr] = cost
+    def add_neighbor(self, nbr):
+        self.neighbors.append(nbr)
 
 class Graph:
     def __init__(self):
