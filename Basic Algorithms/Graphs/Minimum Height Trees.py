@@ -32,7 +32,7 @@ class Graph:
 
         return str(graph)
 
-    def farthest(self, value):
+    def bfs_farthest(self, value):
         queue = deque([value])
         visited = []
         parent = dict()
@@ -45,46 +45,35 @@ class Graph:
 
                 for value in self.graph[popped].neighbors:
                     queue.append(value.value)
-                    parent[value.value] = popped
+                    if value.value not in visited:
+                        parent[value.value] = popped
 
-        print(f'parent: {parent}')
+        return visited[-1], parent
 
-        return visited[-1]
+    def diameter_middle(self, value):
+        first = self.bfs_farthest(value)[0]
+        second = self.bfs_farthest(first)[0]
 
-    def diameter(self, value):
-        first = self.farthest(value)
-        second = self.farthest(first)
-
-        print(first, second)
-        print("============")
-
-        queue = deque([first])
-        visited = []
-        heights = dict()
+        parents = self.bfs_farthest(first)[1]
+        path = []
+        queue = [second]
 
         while queue:
-            popped = queue.popleft()
+            popped = queue.pop()
+            path.insert(0, popped)
+            for k, v in parents.items():
+                if k == popped:
+                    queue.append(v)
 
-            if popped not in visited:
-                visited.append(popped)
+        middle = []
+        size_halved = int(len(path)/2)
+        if size_halved % 2 == 0:
+            middle.append(path[size_halved])
+        else:
+            middle.append(path[size_halved - 1])
+            middle.append(path[size_halved])
 
-                for value in self.graph[popped].neighbors:
-                    if value.value not in visited:
-                        queue.append(value.value)
-                        value.index = popped
-
-                        heights[popped] = value.index
-                        print(heights)
-
-
-        # print([(value.value, value.index) for value in self.graph])
-
-
-        return visited
-
-
-
-
+        return middle
 
 
 g = Graph()
@@ -100,10 +89,8 @@ g.edges(2,9)
 g.edges(4,5)
 g.edges(6,8)
 g.edges(6,7)
-# g.edges(16,17)
 
-print(g)
-g.diameter(5)
+print(g.diameter_middle(0))
 
 
 
