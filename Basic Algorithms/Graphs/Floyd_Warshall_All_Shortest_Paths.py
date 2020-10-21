@@ -1,5 +1,3 @@
-from pprint import pprint
-
 
 class Vertex:
     def __init__(self, value):
