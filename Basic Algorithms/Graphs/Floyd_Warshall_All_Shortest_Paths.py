@@ -31,7 +31,7 @@ class Graph:
 
         return str(printed)
 
-    def shortest_paths(self):
+    def distance_matrix(self):
         infinity = float('inf')
         distance = []
 
@@ -47,7 +47,17 @@ class Graph:
         for coordinate in coordinates:
             distance[coordinate[0]][coordinate[1]] = coordinate[2]
 
-        print(distance)
+        return distance
+
+    def via_matrix(self):
+        via = self.distance_matrix()
+
+        for i in range(len(via)):
+            for j in range(len(via)):
+                if via[i][j] == float('inf'):
+                    via[i][j] = -1
+
+        print(via)
 
 
 g = Graph()
@@ -68,4 +78,5 @@ g.connect_vertices(4, 1, 2)
 print(g)
 
 
-g.shortest_paths()
+print(g.distance_matrix())
+print(g.via_matrix())
