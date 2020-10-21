@@ -56,6 +56,9 @@ class Graph:
             for j in range(len(via)):
                 if via[i][j] == float('inf'):
                     via[i][j] = -1
+                else:
+                    via[i][j] = j
+                via[i][i] = 0
 
         print(via)
 
