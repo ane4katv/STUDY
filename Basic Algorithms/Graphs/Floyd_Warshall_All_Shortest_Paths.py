@@ -1,3 +1,4 @@
+
 class Vertex:
     def __init__(self, value):
         self.value = value
@@ -66,8 +67,6 @@ class Graph:
         distance = self.distance_matrix()
         via = self.via_matrix()
 
-        print(distance[0][3])
-
         for via_node in range(size):
             for from_node in range(size):
                 for to_node in range(size):
@@ -79,7 +78,7 @@ class Graph:
                         distance[from_node][to_node] = new_distance
                         via[from_node][to_node] = via_node
 
-        return distance, via
+        return distance
 
 
 g = Graph()
@@ -97,8 +96,8 @@ g.connect_vertices(3, 4, 1)
 
 g.connect_vertices(4, 1, 2)
 
-print(g)
+# print(g)
 
-print(g.distance_matrix())
+# print(g.distance_matrix())
 # print(g.via_matrix())
 print(g.shortest_distances())
