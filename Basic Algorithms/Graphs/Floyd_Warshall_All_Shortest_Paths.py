@@ -57,10 +57,31 @@ class Graph:
                 if via[i][j] == float('inf'):
                     via[i][j] = -1
                 else:
-                    via[i][j] = j
+                    via[i][j] = j+1
                 via[i][i] = 0
 
-        print(via)
+        return via
+
+    def shortest_distances(self, from_node, to_node):
+        size = len(self.graph) + 1
+        distance = self.distance_matrix()
+        new_distance = float('inf')
+
+        # logic
+        for via_node in range(1,size):
+            for from_node in range(1,size):
+                for to_node in range(1,size):
+                    new_distance = distance[from_node][via_node] + \
+                                   distance[via_node][to_node]
+
+                if new_distance < distance[from_node][to_node]:
+                    # update distance matrix
+                    # update via matrix
+
+
+
+
+
 
 
 g = Graph()
