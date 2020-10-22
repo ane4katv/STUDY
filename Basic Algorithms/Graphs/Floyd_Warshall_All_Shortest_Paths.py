@@ -65,19 +65,18 @@ class Graph:
         size = len(self.graph)
         distance = self.distance_matrix()
         via = self.via_matrix()
-        new_distance = float('inf')
 
-        for via_node in range(1, size):
-            for from_node in range(1, size):
-                for to_node in range(1, size):
+        print(distance[0][3])
+
+        for via_node in range(size):
+            for from_node in range(size):
+                for to_node in range(size):
+
                     new_distance = distance[from_node][via_node] + \
                                    distance[via_node][to_node]
-                    print(distance[from_node][via_node], new_distance, distance[via_node][to_node])
 
                     if new_distance < distance[from_node][to_node]:
-                        # update distance matrix
                         distance[from_node][to_node] = new_distance
-                        # update via matrix
                         via[from_node][to_node] = via_node
 
         return distance, via
@@ -100,6 +99,6 @@ g.connect_vertices(4, 1, 2)
 
 print(g)
 
-# print(g.distance_matrix())
+print(g.distance_matrix())
 # print(g.via_matrix())
 print(g.shortest_distances())
