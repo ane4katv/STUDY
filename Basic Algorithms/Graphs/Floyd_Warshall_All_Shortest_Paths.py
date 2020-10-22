@@ -1,4 +1,3 @@
-
 class Vertex:
     def __init__(self, value):
         self.value = value
@@ -42,7 +41,7 @@ class Graph:
         coordinates = []
         for k, v in self.graph.items():
             for value in v.neighbors:
-                coordinates.append((k-1, value[0]-1, value[1]))
+                coordinates.append((k - 1, value[0] - 1, value[1]))
 
         for coordinate in coordinates:
             distance[coordinate[0]][coordinate[1]] = coordinate[2]
@@ -57,31 +56,31 @@ class Graph:
                 if via[i][j] == float('inf'):
                     via[i][j] = -1
                 else:
-                    via[i][j] = j+1
+                    via[i][j] = j + 1
                 via[i][i] = 0
 
         return via
 
-    def shortest_distances(self, from_node, to_node):
-        size = len(self.graph) + 1
+    def shortest_distances(self):
+        size = len(self.graph)
         distance = self.distance_matrix()
+        via = self.via_matrix()
         new_distance = float('inf')
 
-        # logic
-        for via_node in range(1,size):
-            for from_node in range(1,size):
-                for to_node in range(1,size):
+        for via_node in range(1, size):
+            for from_node in range(1, size):
+                for to_node in range(1, size):
                     new_distance = distance[from_node][via_node] + \
                                    distance[via_node][to_node]
+                    print(distance[from_node][via_node], new_distance, distance[via_node][to_node])
 
-                if new_distance < distance[from_node][to_node]:
-                    # update distance matrix
-                    # update via matrix
+                    if new_distance < distance[from_node][to_node]:
+                        # update distance matrix
+                        distance[from_node][to_node] = new_distance
+                        # update via matrix
+                        via[from_node][to_node] = via_node
 
-
-
-
-
+        return distance, via
 
 
 g = Graph()
@@ -101,6 +100,6 @@ g.connect_vertices(4, 1, 2)
 
 print(g)
 
-
-print(g.distance_matrix())
-print(g.via_matrix())
+# print(g.distance_matrix())
+# print(g.via_matrix())
+print(g.shortest_distances())
