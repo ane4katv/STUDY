@@ -74,11 +74,27 @@ class Graph:
                     new_distance = distance[from_node][via_node] + \
                                    distance[via_node][to_node]
 
+
                     if new_distance < distance[from_node][to_node]:
                         distance[from_node][to_node] = new_distance
-                        via[from_node][to_node] = via_node
+                        via[from_node][to_node] = via_node + 1
 
-        return distance
+        return distance, via
+
+    def shortest_path(self, start, end, path=[]):
+        via = self.shortest_distances()[1]
+
+        if via[start-1][end-1] == end:
+            if start not in path:
+                path.append(start)
+            if end not in path:
+                path.append(end)
+        else:
+            inside = via[start - 1][end - 1]
+            self.shortest_path(start, inside, path)
+            self.shortest_path(inside, end, path)
+
+        return path
 
 
 g = Graph()
@@ -96,8 +112,5 @@ g.connect_vertices(3, 4, 1)
 
 g.connect_vertices(4, 1, 2)
 
-# print(g)
-
-# print(g.distance_matrix())
-# print(g.via_matrix())
 print(g.shortest_distances())
+print(g.shortest_path(4, 2))

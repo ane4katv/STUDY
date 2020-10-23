@@ -69,5 +69,4 @@ g.connect_vertices(4, 1, 2)
 
 print(g)
 
-
 g.shortest_paths()
