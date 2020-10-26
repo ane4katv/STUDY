@@ -32,32 +32,42 @@ class Graph:
 
         return str(printed)
 
-    def if_connected(self, root):
+    def connected_paths(self, root):
         stack = [root]
+        count_visited = 0
+        connected_lists = []
 
-        while stack:
-            popped = stack.pop()
+        while count_visited < len(self.graph):
 
-            self.graph[popped].visited = True
+            # add vertex to stack (how?)
+            # vertex.visited = True
+            # count_visited += 1
 
-            for value in self.graph[popped].neighbors:
-                stack.append(value[0])
 
-        for key in self.graph:
+            while stack:
+                new_list = []
+                popped = stack.pop()
 
-            if self.graph[key].visited is False:
-                return False
+                for i in self.graph[popped]:
+                    if self.graph[popped][0].visited is False:
+                        self.graph[popped][0].visited = True
+                        count_visited += 1
 
-        return True
+                    stack.append(i[0])
+
+                connected_lists.append(new_list)
+
+
 
 
 g = Graph()
 
 g.connect_vertices("A", "B", 7)
+g.connect_vertices("A", "G", 15)
 g.connect_vertices("B", "C", 3)
 g.connect_vertices("C", "D", 2)
 g.connect_vertices("E", "F", 8)
 
 print(g)
-print(g.if_connected("A"))
+print(g.connected_paths("A"))
 
