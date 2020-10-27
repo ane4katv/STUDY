@@ -23,39 +23,57 @@ class Graph:
         if end not in self.graph:
             self.add_vertex(end)
 
-        self.graph[start].add_neighbor(self.graph[end], cost)
+        self.graph[start].add_neighbor(self.graph[end].value, cost)
 
     def __str__(self):
         printed = dict()
         for k, v in self.graph.items():
-            printed[k] = [v[0].value for v in v.neighbors]
+            printed[k] = v.neighbors
 
         return str(printed)
 
     def connected_paths(self):
         stack = []
+        visited = []
         count_visited = 0
         connected_lists = []
 
         while count_visited < len(self.graph):
             for vertex in self.graph:
-                if self.graph[vertex].visited is False:
-                    stack.append(self.graph[vertex])
+                if vertex not in visited:
+                    visited.append(vertex)
+                    stack.append(vertex)
                     count_visited += 1
                     self.graph[vertex].visited = True
 
-                    new_list = [vertex]
+            while stack:
+                new_list = []
+                popped = stack.pop()
 
-                    while stack:
-                        popped = stack.pop()
-                        for neighbor in popped.neighbors:
-                            if neighbor[0].visited is False:
-                                neighbor[0].visited = True
-                                count_visited += 1
-                                stack.append(neighbor[0])
+                print(self.graph[popped].value)
 
-                            new_list.append(neighbor[0].value)
+                if self.graph[popped].visited is False:
+                    self.graph[popped].visited = True
+                    count_visited += 1
 
-                    connected_lists.append(new_list)
+                    stack.append(self.graph[popped].neighbors)
 
-        return connected_lists
+                    new_list.append()
+
+                connected_lists.append(new_list)
+            return connected_lists
+
+
+
+
+g = Graph()
+
+g.connect_vertices("A", "B", 7)
+# g.connect_vertices("A", "G", 15)
+g.connect_vertices("B", "C", 3)
+g.connect_vertices("C", "D", 2)
+g.connect_vertices("E", "F", 8)
+
+print(g)
+print(g.connected_paths())
+
