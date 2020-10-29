@@ -28,7 +28,7 @@ class Graph:
     def __str__(self):
         printed = dict()
         for k, v in self.graph.items():
-            printed[k] = [n[0].value for n in v.neighbors]
+            printed[k] = [v[0].value for v in v.neighbors]
 
         return str(printed)
 
@@ -43,28 +43,32 @@ class Graph:
                     stack.append(self.graph[vertex])
                     count_visited += 1
                     self.graph[vertex].visited = True
-                    new_list = [self.graph[vertex]]
+
+                    new_list = [vertex]
+
                     while stack:
                         popped = stack.pop()
-                        for neighbour in popped.neighbors:
-                            if neighbour[0].visited is False:
-                                neighbour[0].visited = True
+                        for neighbor in popped.neighbors:
+                            if neighbor[0].visited is False:
+                                neighbor[0].visited = True
                                 count_visited += 1
-                                stack.append(neighbour[0])
-                                new_list.append(neighbour[0])
+                                stack.append(neighbor[0])
+
+                            new_list.append(neighbor[0].value)
+
                     connected_lists.append(new_list)
+
         return connected_lists
 
 
 g = Graph()
 
 g.connect_vertices("A", "B", 7)
-# g.connect_vertices("A", "G", 15)
+g.connect_vertices("A", "G", 15)
 g.connect_vertices("B", "C", 3)
 g.connect_vertices("C", "D", 2)
 g.connect_vertices("E", "F", 8)
 
 print(g)
-for l in g.connected_paths():
-    print([v.value for v in l])
+print(g.connected_paths())
 

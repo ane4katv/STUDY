@@ -1,73 +1,83 @@
-
-class Vertex:
-    def __init__(self, value):
-        self.value = value
-        self.neighbors = []
-        self.visited = False
-
-    def add_neighbor(self, nbr, cost=0):
-        self.neighbors.append((nbr, cost))
+N = 6 # len of the graph
+parents = []
+infinite = float('inf')
 
 
-class Graph:
-    def __init__(self):
-        self.graph = {}
+def bfs(residual_graph, source, sink, parents):
+    queue = []
+    visited = []
 
-    def add_vertex(self, key):
-        self.graph[key] = Vertex(key)
+    for x in range(0, N):
+        visited.append(0)
 
-    def connect_vertices(self, start, end, cost=0):
-        if start not in self.graph:
-            self.add_vertex(start)
+    queue.append(source)
+    visited[source] = True
+    parents[source] = -1
 
-        if end not in self.graph:
-            self.add_vertex(end)
+    while queue: # originally while not len(queue) == 0 ?!
+        u = queue.pop(0)
+        for v in range(0, N):
+            if visited[v] is False and residual_graph[u][v] > 0:
+                queue.append(v)
+                visited[v] = True
+                parents[v] = u
 
-        self.graph[start].add_neighbor(self.graph[end].value, cost)
+    if visited[sink]:
+        return True
+    else:
+        return False
 
-    def __str__(self):
-        printed = dict()
-        for k, v in self.graph.items():
-            printed[k] = v.neighbors
+def ford_fulkerson(g, source, sink):
+    u = 0
+    v = 0
 
-        return str(printed)
+    residual_graph = g
+    max_flow = 0
 
-    def connected_paths(self, root):
-        stack = [root]
-        count_visited = 0
-        connected_lists = []
+    while bfs(residual_graph, source, sink, parents):
+        path_flow = infinite
+        v = sink
 
-        while count_visited < len(self.graph):
+        while v != source:
+            u = parents[v]
+            path_flow = min(path_flow, residual_graph[u][v])
+            v = parents[v]
 
-            # add vertex to stack (how?)
-            # vertex.visited = True
-            # count_visited += 1
+        v = sink
 
+        while v != source:
+            u = parents[v]
+            residual_graph[u][v] -= path_flow
+            residual_graph[v][u] += path_flow
 
-            while stack:
-                new_list = []
-                popped = stack.pop()
+            v = parents[v]
 
-                for i in self.graph[popped]:
-                    if self.graph[popped][0].visited is False:
-                        self.graph[popped][0].visited = True
-                        count_visited += 1
+        max_flow += path_flow
 
-                    stack.append(i[0])
-
-                connected_lists.append(new_list)
-
-
+    return max_flow()
 
 
-g = Graph()
+def main():
+    graph = \
+    [
+        [0, 16, 13, 0, 0, 0],
+        [0, 0, 10, 12, 0, 0],
+        [0, 4, 0, 0, 14, 0],
+        [0, 0, 9, 0, 0, 20],
+        [0, 0, 0, 7, 0, 4]
+    ]
 
-g.connect_vertices("A", "B", 7)
-g.connect_vertices("A", "G", 15)
-g.connect_vertices("B", "C", 3)
-g.connect_vertices("C", "D", 2)
-g.connect_vertices("E", "F", 8)
+    for x in range(0, N):
+        parents.append(0)
 
-print(g)
-print(g.connected_paths("A"))
+    print(f'max possible flow is {ford_fulkerson(graph, 0, N-1)}')
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+
+
 

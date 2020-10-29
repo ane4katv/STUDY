@@ -56,7 +56,7 @@ g = Graph()
 g.connect_vertices("A", "B", 7)
 g.connect_vertices("B", "C", 3)
 g.connect_vertices("C", "D", 2)
-g.connect_vertices("E", "F", 8)
+# g.connect_vertices("E", "F", 8)
 
 print(g)
 print(g.if_connected("A"))
