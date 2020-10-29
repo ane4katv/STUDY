@@ -5,7 +5,7 @@ class Vertex:
         self.neighbors = []
 
     def add_neighbor(self, nbr, capacity, rev_capacity):
-        self.neighbors.append((nbr, capacity, rev_capacity))
+        self.neighbors.append([nbr, capacity, rev_capacity])
 
 
 class Graph:
@@ -26,14 +26,11 @@ class Graph:
     def __str__(self):
         graph = dict()
         for i in self.graph:
-            a = self.graph[i].neighbors
-
-            graph[i] = [i for i in a]
+            graph[i] = [i for i in self.graph[i].neighbors]
 
         return str(graph)
 
-    def path_finder(self, source, sink):
-        residual_graph = self.graph
+    def path_finder(self, source, sink, residual_graph):
         current = -1
         queue = [source]
         parents = dict()
@@ -61,19 +58,38 @@ class Graph:
             return path
 
     def max_flow(self, source, sink):
-        max_flow = 0
-        path = self.path_finder(source, sink)
+        residual_graph = self.graph
+        path = self.path_finder(source, sink, residual_graph)
         flow = []
+        max_flow = 0
 
         for i in range(len(path)):
-            res = self.graph[path[i]]
-            for j in res.neighbors:
+            for j in residual_graph[path[i]].neighbors:
                 if j[0] == path[i+1]:
                     flow.append(j[1])
 
-        max_flow += min(flow)
+        capacity = min(flow)
 
-        print(max_flow)
+        # change residual_graph (costs of edges)
+
+        for i in range(len(path)):
+            for j in residual_graph[path[i]].neighbors:
+                if j[0] == path[i + 1]:
+                    j[1] -= capacity
+                    j[2] += capacity
+
+        graph = dict()
+        for i in residual_graph:
+            graph[i] = [i for i in self.graph[i].neighbors]
+        print(graph)
+
+
+        # run path() on updated residual_graph
+        # run max_flow() on updated path
+
+        max_flow += capacity
+
+
 
 
 
@@ -98,7 +114,6 @@ g.edges("F", "G", 9, 0)
 
 
 print(g)
-print(g.path_finder("A", "G"))
 g.max_flow("A", "G")
 
 
