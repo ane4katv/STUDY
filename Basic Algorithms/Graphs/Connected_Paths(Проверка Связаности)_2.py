@@ -56,8 +56,6 @@ class Graph:
         return connected_lists
 
 
-
-
 g = Graph()
 
 g.connect_vertices("A", "B", 7)
