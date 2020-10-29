@@ -43,7 +43,7 @@ class Graph:
                 current = popped
 
                 for i in residual_graph[popped].neighbors:
-                    if i[0] not in visited and (i[1] > 0 or i[2] > 0):
+                    if i[0] not in visited and (i[1] > 0):
                         queue.append(i[0])
                         parents[i[0]] = current
 
@@ -56,6 +56,8 @@ class Graph:
                 child = parents[child]
 
             return path
+        else:
+            return []
 
     def capacity(self, source, sink, graph):
         path = self.path_finder(source, sink, graph)
@@ -65,32 +67,34 @@ class Graph:
             for j in graph[path[i]].neighbors:
                 if j[0] == path[i+1]:
                     flow.append(j[1])
-
+        print(flow)
         capacity = min(flow)
 
-        return capacity
+        return path, capacity
 
     def update_graph(self, source, sink, graph):
-        capacity = self.capacity(source, sink, graph)
-        path = self.path_finder(source, sink, graph)
-
+        path, capacity = self.capacity(source, sink, graph)
+        '''path = self.path_finder(source, sink, graph)'''
+        print(path)
+        print(capacity)
         for i in range(len(path)):
             for j in graph[path[i]].neighbors:
                 if j[0] == path[i + 1]:
                     j[1] -= capacity
                     j[2] += capacity
-
-        return graph
+        return path, capacity, graph
 
     def max_flow(self, source, sink):
         max_flow = 0
 
         # Вот тут нужен какой-то луп, чтобы каждый раз искать новый путь в обновленном графе
-
-        path = self.path_finder(source, sink, self.graph)
-        capacity = self.capacity(source, sink, self.graph)
-        max_flow += capacity
-        new_graph = self. update_graph(source, sink, self.graph)
+        new_graph = self.graph
+        path = [source]
+        while path is not False:
+            '''path = self.path_finder(source, sink, new_graph)'''
+            '''capacity = self.capacity(source, sink, new_graph)'''
+            path, capacity, new_graph = self.update_graph(source, sink, new_graph)
+            max_flow += capacity
 
 
 
