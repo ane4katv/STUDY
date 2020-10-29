@@ -32,15 +32,48 @@ class Graph:
 
         return str(graph)
 
-    def max_flow(self, source, sink):
+    def path_finder(self, source, sink):
         residual_graph = self.graph
-        current = source
-        queue = []
-        max_flow = 0
+        current = -1
+        queue = [source]
+        parents = dict()
         visited = set()
 
+        while queue:
+            popped = queue.pop(0)
+            if popped not in visited:
+                visited.add(popped)
+                current = popped
 
+                for i in residual_graph[popped].neighbors:
+                    if i[0] not in visited and (i[1] > 0 or i[2] > 0):
+                        queue.append(i[0])
+                        parents[i[0]] = current
 
+        if current == sink:
+            child = sink
+            path = [sink]
+
+            while child in parents:
+                path.insert(0, parents[child])
+                child = parents[child]
+
+            return path
+
+    def max_flow(self, source, sink):
+        max_flow = 0
+        path = self.path_finder(source, sink)
+        flow = []
+
+        for i in range(len(path)):
+            res = self.graph[path[i]]
+            for j in res.neighbors:
+                if j[0] == path[i+1]:
+                    flow.append(j[1])
+
+        max_flow += min(flow)
+
+        print(max_flow)
 
 
 
@@ -50,7 +83,6 @@ class Graph:
 
 
 g = Graph()
-
 
 g.edges("A", "B", 3, 0)
 g.edges("A", "D", 3, 0)
@@ -66,6 +98,8 @@ g.edges("F", "G", 9, 0)
 
 
 print(g)
+print(g.path_finder("A", "G"))
+g.max_flow("A", "G")
 
 
 
