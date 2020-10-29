@@ -1,4 +1,3 @@
-
 class Vertex:
     def __init__(self, value):
         self.value = value
@@ -96,8 +95,6 @@ class Graph:
             path, capacity, new_graph = self.update_graph(source, sink, new_graph)
             max_flow += capacity
 
-
-
         return max_flow
 
 
@@ -117,6 +114,11 @@ g.edges("F", "G", 9, 0)
 
 print(g)
 g.max_flow("A", "G")
+
+
+
+
+
 
 
 
