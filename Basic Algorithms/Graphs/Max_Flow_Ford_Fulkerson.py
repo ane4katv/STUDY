@@ -57,45 +57,42 @@ class Graph:
 
             return path
 
-    def max_flow(self, source, sink):
-        residual_graph = self.graph
-        path = self.path_finder(source, sink, residual_graph)
+    def capacity(self, source, sink, graph):
+        path = self.path_finder(source, sink, graph)
         flow = []
-        max_flow = 0
 
         for i in range(len(path)):
-            for j in residual_graph[path[i]].neighbors:
+            for j in graph[path[i]].neighbors:
                 if j[0] == path[i+1]:
                     flow.append(j[1])
 
         capacity = min(flow)
 
-        # change residual_graph (costs of edges)
+        return capacity
+
+    def update_graph(self, source, sink, graph):
+        capacity = self.capacity(source, sink, graph)
+        path = self.path_finder(source, sink, graph)
 
         for i in range(len(path)):
-            for j in residual_graph[path[i]].neighbors:
+            for j in graph[path[i]].neighbors:
                 if j[0] == path[i + 1]:
                     j[1] -= capacity
                     j[2] += capacity
 
-        graph = dict()
-        for i in residual_graph:
-            graph[i] = [i for i in self.graph[i].neighbors]
-        print(graph)
+        return graph
 
+    def max_flow(self, source, sink):
+        max_flow = 0
 
-        # run path() on updated residual_graph
-        # run max_flow() on updated path
+        # Вот тут нужен какой-то луп, чтобы каждый раз искать новый путь в обновленном графе
 
+        path = self.path_finder(source, sink, self.graph)
+        capacity = self.capacity(source, sink, self.graph)
         max_flow += capacity
+        new_graph = self. update_graph(source, sink, self.graph)
 
-
-
-
-
-
-
-
+        return max_flow
 
 
 g = Graph()
@@ -111,7 +108,6 @@ g.edges("D", "E", 2, 0)
 g.edges("D", "F", 6, 0)
 g.edges("E", "G", 1, 0)
 g.edges("F", "G", 9, 0)
-
 
 print(g)
 g.max_flow("A", "G")
