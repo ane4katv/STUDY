@@ -66,16 +66,15 @@ class Graph:
             for j in graph[path[i]].neighbors:
                 if j[0] == path[i+1]:
                     flow.append(j[1])
-        print(flow)
+        print(f'flow: {flow}')
         capacity = min(flow)
 
         return path, capacity
 
     def update_graph(self, source, sink, graph):
         path, capacity = self.capacity(source, sink, graph)
-        '''path = self.path_finder(source, sink, graph)'''
-        print(path)
-        print(capacity)
+        print(f'path: {path}')
+        print(f'capacity: {capacity}')
         for i in range(len(path)):
             for j in graph[path[i]].neighbors:
                 if j[0] == path[i + 1]:
@@ -85,13 +84,10 @@ class Graph:
 
     def max_flow(self, source, sink):
         max_flow = 0
-
-        # Вот тут нужен какой-то луп, чтобы каждый раз искать новый путь в обновленном графе
         new_graph = self.graph
         path = [source]
-        while path is not False:
-            '''path = self.path_finder(source, sink, new_graph)'''
-            '''capacity = self.capacity(source, sink, new_graph)'''
+
+        while path:
             path, capacity, new_graph = self.update_graph(source, sink, new_graph)
             max_flow += capacity
 
