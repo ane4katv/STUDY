@@ -32,27 +32,25 @@ class Graph:
         min_edges = []
         queue = [vertex]
 
-
         while queue:
             edges = {}
             popped = queue.pop(0)
 
             for end, weight in self.graph[popped].neighbors:
-                    edges[weight] = (popped, end)
+                edges[weight] = (popped, end)
 
       # How to exclude previously found min_edge?
 
-            sorted_keys = []
-            for i in sorted(edges):
-                sorted_keys.append(i)
+            min_edge = sorted(edges.items())[0][1]
 
-            if sorted_keys:
-                min_edge = edges[sorted_keys[0]]
+            if min_edge not in min_edges and min_edge[::-1]not in min_edges:
                 min_edges.append(min_edge)
-                queue.append(min_edge[1])
 
+            queue.append(min_edge[1])
+            print(min_edges)
+        # Now I am getting stuck here in a infinite loop, can't figure out why :(
 
-        return min_edges
+        # return min_edges
 
     def __str__(self):
         graph = dict()
@@ -77,5 +75,5 @@ g.edges("F", "H", 5)
 g.edges("H", "E", 3)
 
 # print(g)
-g.prim("A")
+print(g.prim("A"))
 # print(g.min_edge())
