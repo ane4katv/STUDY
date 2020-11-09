@@ -27,27 +27,36 @@ class Graph:
         self.graph[start].add_neighbor(self.graph[end].value, size)
         self.graph[end].add_neighbor(self.graph[start].value, size)
 
-
     def prim(self, vertex):
         min_edges = []
         queue = [vertex]
+        visited = [vertex]
 
         while queue:
             edges = {}
             popped = queue.pop(0)
 
             for end, weight in self.graph[popped].neighbors:
-                edges[weight] = (popped, end)
+                if end not in visited:
+                    edges[weight] = (popped, end)
 
       # How to exclude previously found min_edge?
+            print(edges)
+            if len(edges) > 0:
+                min_edge = sorted(edges.items())[0][1]
+                if min_edge not in min_edges and min_edge[::-1]not in min_edges:
+                    min_edges.append(min_edge)
 
-            min_edge = sorted(edges.items())[0][1]
+                queue.append(min_edge[1])
+                visited.append(min_edge[1])
+                print(min_edges)
+                print(queue)
+            else:
+                if len(visited) == len(self.graph):
+                    return min_edges
+                else:
+                    
 
-            if min_edge not in min_edges and min_edge[::-1]not in min_edges:
-                min_edges.append(min_edge)
-
-            queue.append(min_edge[1])
-            print(min_edges)
         # Now I am getting stuck here in a infinite loop, can't figure out why :(
 
         # return min_edges
