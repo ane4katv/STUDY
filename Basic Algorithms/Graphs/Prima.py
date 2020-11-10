@@ -40,26 +40,26 @@ class Graph:
                 if end not in visited:
                     edges[weight] = (popped, end)
 
-      # How to exclude previously found min_edge?
-            print(edges)
             if len(edges) > 0:
                 min_edge = sorted(edges.items())[0][1]
-                if min_edge not in min_edges and min_edge[::-1]not in min_edges:
+                if min_edge not in min_edges and min_edge[::-1] not in min_edges:
                     min_edges.append(min_edge)
 
                 queue.append(min_edge[1])
                 visited.append(min_edge[1])
-                print(min_edges)
-                print(queue)
             else:
-                if len(visited) == len(self.graph):
+                if len(visited) == len(edges):
                     return min_edges
                 else:
-                    
+                    for i in self.graph:
+                        if i not in visited:
+                            sorted_i = sorted(self.graph[i].neighbors, key=lambda x: x[1])
+                            new_min_edge = (i, sorted_i[0][0])
 
-        # Now I am getting stuck here in a infinite loop, can't figure out why :(
+                            if new_min_edge not in min_edges and new_min_edge[::-1] not in min_edges:
+                                min_edges.append(new_min_edge)
+        return min_edges
 
-        # return min_edges
 
     def __str__(self):
         graph = dict()
