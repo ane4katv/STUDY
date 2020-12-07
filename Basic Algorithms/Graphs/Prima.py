@@ -56,8 +56,15 @@ class Graph:
                             sorted_i = sorted(self.graph[i].neighbors, key=lambda x: x[1])
                             new_min_edge = (i, sorted_i[0][0])
 
-                            if new_min_edge not in min_edges and new_min_edge[::-1] not in min_edges:
+                            if new_min_edge[1] not in visited:
                                 min_edges.append(new_min_edge)
+                                visited.append(new_min_edge[0])
+                                visited.append(new_min_edge[1])
+                                print(new_min_edge[0])
+                            else:
+                                queue.append(new_min_edge[0])
+                                print(min_edges)
+
         return min_edges
 
 
