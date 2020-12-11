@@ -10,7 +10,7 @@ class Tree:
         self.main_squad = Quad(borders)
 
     def __str__(self):
-        print(str(self.main_squad.borders)) # how to make it work?
+        return str(self.main_squad.borders) # how to make it work?
 
     def divide_to_quads(self, quad):
 
@@ -28,9 +28,11 @@ class Tree:
 
             for x, y in quad.points:
                 for top_left, bottom_right in kids:
-                    if top_left[0] <= x <= bottom_right[0] and top_left[1] <= y <= bottom_right[1]:  # how to avoid duplicates here?
+                    print(top_left, bottom_right)
+                    if (top_left[0] <= x < bottom_right[0]) and (top_left[1] <= y < bottom_right[1]):  # how to avoid duplicates here?
                         kid = Quad([top_left, bottom_right])
                         kid.points.append([x, y])
+                        quad.children.append(kid)
                         self.divide_to_quads(kid)
 
     def insert(self, quad, point):  # point = [x,y]
