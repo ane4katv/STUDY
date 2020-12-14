@@ -1,5 +1,10 @@
-a = [[1,2],[3,4]]
+a = {"*": "*"}
 
-for i in a:
-    for x, y in a:
-        print(y, x)
+word = "waiter"
+
+for i in word:
+    if i not in a:
+        a[i] = {}
+    a = a[i]
+
+print(a)
