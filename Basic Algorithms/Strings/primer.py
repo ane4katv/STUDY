@@ -1,0 +1,1 @@
+print('python'.endswith('th', 0, 4))

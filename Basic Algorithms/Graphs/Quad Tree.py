@@ -17,8 +17,11 @@ class Tree:
             if self.main_squad.borders[0][0] <= top_left <= self.main_squad.borders[1][0] and \
                     self.main_squad.borders[1][1] <= bottom_right <= self.main_squad.borders[0][1]:
                 self.main_squad.points.append([top_left, bottom_right])
+        self.divide_to_quads(self.main_squad)
 
     def divide_to_quads(self, quad):
+        if len(quad.points) <= 4:
+            return
 
         while len(quad.points) > 4:
 
@@ -41,7 +44,8 @@ class Tree:
                         kid.points.append([x, y])
                         quad.children.append(kid)
                         print(quad.children)
-                        self.divide_to_quads(kid)
+                        '''self.divide_to_quads(kid)'''
+            quad.points = []
 
     def insert(self, quad, point):  # point = [x,y]
         pass
@@ -67,8 +71,9 @@ tree_borders = [[0, 10], [10, 0]]
 quad_tree = Tree(tree_borders)
 
 quad_borders = [[0, 6], [3, 0]]
-quad = Quad(quad_borders)
+quad = Tree(quad_borders)
+print(quad)
 
 quad_tree.add_points([[1, 1], [1, 2], [2, 1], [3, 0], [3, 1]])
-
-quad_tree.divide_to_quads(quad)
+print(quad)
+'''quad_tree.divide_to_quads(quad)'''
