@@ -1,3 +1,6 @@
+# https://youtu.be/hjUJFjcrbR4?t=798
+
+
 class TrieNode:
     def __init__(self, letter):
         self.letter = letter
