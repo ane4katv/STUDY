@@ -45,7 +45,8 @@ class Tree:
                 for x, y in quad.points:
                     if top_left[0] <= x < bottom_right[0] and bottom_right[1] <= y < top_left[1]:
                         kid.points.append([x, y])
-                quad.children.append(kid)
+                if len(kid.points) != 0:
+                    quad.children.append(kid)
             quad.points = []
             print(self.main_squad)
             for child in quad.children:
