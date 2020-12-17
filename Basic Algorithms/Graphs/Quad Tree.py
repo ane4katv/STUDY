@@ -5,7 +5,11 @@ class Quad:
         self.borders = borders  # [top_left, bottom_right]
 
     def __str__(self):
-        return str(self.borders) + " children: " + str(self.children) + ' points: ' + str(self.points)
+        s = str(self.borders) + '\n'
+        for child in self.children:
+            s = s + ' child ' + child.__str__()
+        s = s + ' points: ' + str(self.points) + '\n'
+        return s
 
 
 class Tree:
@@ -13,7 +17,7 @@ class Tree:
         self.main_squad = Quad(borders)
 
     def __str__(self):
-        return str(self.main_squad.borders) + " children: " + str(self.main_squad.children) + " point: " + str(self.main_squad.points)
+        return self.main_squad.__str__()
 
     def add_points(self, points):
         for top_left, bottom_right in points:
