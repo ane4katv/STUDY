@@ -1,3 +1,5 @@
+# https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/880/
+
 def reverse_num(x):
 
     x = list(str(x))
