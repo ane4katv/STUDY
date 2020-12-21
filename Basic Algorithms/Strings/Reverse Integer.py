@@ -1,8 +1,14 @@
 # https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/880/
 
 def reverse_num(x):
-
     x = list(str(x))
+
+    if len(x) == 0:
+        return 0
+
+    if len(x) == 1:
+        return x[0]
+
     while x[-1] == '0':
         x.pop()
     print(x)
