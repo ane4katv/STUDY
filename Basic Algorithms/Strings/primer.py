@@ -1,26 +1,23 @@
-def reverse_num(x):
+def first_unique_char(s):
+    unique_chars = []
+    repeated_chars = []
+    for i in s:
+        if i not in unique_chars:
+            unique_chars.append(i)
+        else:
+            if i not in repeated_chars:
+                repeated_chars.append(i)
 
-    x = list(str(x))
-    while x[-1] == '0':
-        x.pop()
-    print(x)
-    if x[0] == '-':
-        return - reverse_poz(x[1:])
-    else:
-        return reverse_poz(x)
+    print(unique_chars)
+    print(repeated_chars)
 
+    if sorted(unique_chars) == sorted(repeated_chars):
+        return -1
 
-def reverse_poz(num):
-    start = 0
-    end = len(num) - 1
-    while end > start:
-        num[start], num[end] = num[end], num[start]
-        start += 1
-        end -= 1
-
-    num_to_str = ''
-    return int(num_to_str.join(num))
+    for i in unique_chars:
+        if i not in repeated_chars:
+            return s.find(i)
 
 
-x = -12300
-print(reverse_num(x))
+input_str = 'adaccdcda'
+print(first_unique_char(input_str))

@@ -1,5 +1,8 @@
-input_list = [1, 2, 2, 5, 8, 4, 4, 8]
 
-# converting our list to set
-new_set = set(input_list)
-print("No of unique items in the list are:", len(new_set))
+sets = {10, 20, 26, 41, 54, 20}
+print(sets)
+
+sets.discard(20)
+print(sets)
+
+
