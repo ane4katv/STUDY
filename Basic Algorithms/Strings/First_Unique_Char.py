@@ -9,8 +9,6 @@ def first_unique_char(s):
         else:
             my_dict[i] += 1
 
-    print(my_dict)
-
     for i in range(len(s)):
         if my_dict[s[i]] == 1:
             return i
