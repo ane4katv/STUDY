@@ -1,8 +1,4 @@
+s = ['4', '2']
+s = int("".join(s))
 
-sets = {10, 20, 26, 41, 54, 20}
-print(sets)
-
-sets.discard(20)
-print(sets)
-
-
+print(s)
